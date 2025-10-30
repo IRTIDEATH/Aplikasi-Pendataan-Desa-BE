@@ -9,6 +9,8 @@ async function bootstrap() {
     bodyParser: false, // Diperlukan untuk Better Auth
   });
 
+  app.setGlobalPrefix('api');
+
   const expressApp = app.getHttpAdapter().getInstance();
 
   const authService = app.get<AuthService>(AuthService);
@@ -23,7 +25,11 @@ async function bootstrap() {
   const logger = app.get(WINSTON_MODULE_NEST_PROVIDER);
   app.useLogger(logger);
 
-  app.setGlobalPrefix('api');
+  app.enableCors({
+    credentials: true,
+    origin: ['http://localhost:3001']
+  });
+
   await app.listen(3000);
 }
 bootstrap();
