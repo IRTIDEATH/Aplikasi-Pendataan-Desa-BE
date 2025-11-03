@@ -3,12 +3,17 @@ import { AppModule } from './app.module';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { AuthService } from '@thallesp/nestjs-better-auth';
 import { toNodeHandler } from 'better-auth/node';
+import { env } from './lib/env';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
-    bodyParser: false, // Diperlukan untuk Better Auth
+    bodyParser: false,
   });
 
+  app.enableCors({
+    credentials: true,
+    origin: `${env.UI_URL}`,
+  });
   app.setGlobalPrefix('api');
 
   const expressApp = app.getHttpAdapter().getInstance();
@@ -24,11 +29,6 @@ async function bootstrap() {
 
   const logger = app.get(WINSTON_MODULE_NEST_PROVIDER);
   app.useLogger(logger);
-
-  app.enableCors({
-    credentials: true,
-    origin: ['http://localhost:3001']
-  });
 
   await app.listen(3000);
 }

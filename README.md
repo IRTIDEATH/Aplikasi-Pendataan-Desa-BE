@@ -5,7 +5,7 @@
 Aplikasi ini dibangun untuk mendukung sistem informasi pengelolaan data desa. Aplikasi ini menyediakan endpoint untuk manajemen data warga, registrasi peristiwa kependudukan, dan administrasi desa lainnya.
 
 > [!NOTE]
-> Backend API untuk aplikasi Pendataan Desa. Aplikasi ini dibuat sebagai project pembelajaran untuk memahami cara membuat REST API Backend, dan dirancang untuk terintegrasi dengan [Frontend Nuxt.js](https://github.com/IRTIDEATH/Aplikasi-Pendataan-Desa-FE). Repository ini nantinya akan dilengkapi dengan tutorial lengkap dalam bentuk markdown yang dapat membantu Anda mempelajari cara membuat REST API menggunakan Nest.js. Cocok untuk semua yang ingin belajar backend development.
+> Backend API untuk aplikasi Pendataan Desa. Aplikasi ini dibuat sebagai project pembelajaran untuk memahami cara membuat REST API Backend, dan dirancang untuk terintegrasi dengan [Frontend Next.js](https://github.com/IRTIDEATH/Aplikasi-Pendataan-Desa-FE). Repository ini nantinya akan dilengkapi dengan tutorial lengkap dalam bentuk markdown yang dapat membantu Anda mempelajari cara membuat REST API menggunakan Nest.js. Cocok untuk semua yang ingin belajar backend development.
 
 ## Fitur
 
