@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { AuthModule } from '@thallesp/nestjs-better-auth';
 import { auth } from './lib/auth';
-import { UserModule } from './users/user.module';
 import { WinstonModule } from 'nest-winston';
 import * as winston from 'winston';
 import { ConfigModule } from '@nestjs/config';
@@ -12,7 +11,6 @@ import { ErrorFilter } from './common/error.filter';
 @Module({
   imports: [
     AuthModule.forRoot({ auth }),
-    UserModule,
     WinstonModule.forRoot({
       level: 'debug',
       format: winston.format.json(),
