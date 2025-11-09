@@ -4,9 +4,9 @@ import { auth } from './lib/auth';
 import { WinstonModule } from 'nest-winston';
 import * as winston from 'winston';
 import { ConfigModule } from '@nestjs/config';
-import { PrismaService } from './common/prisma.service';
 import { APP_FILTER } from '@nestjs/core';
 import { ErrorFilter } from './common/error.filter';
+import { PrismaModule } from './common/database/prisma.module';
 
 @Module({
   imports: [
@@ -19,10 +19,10 @@ import { ErrorFilter } from './common/error.filter';
     ConfigModule.forRoot({
       isGlobal: true,
     }),
+    PrismaModule,
   ],
   controllers: [],
   providers: [
-    PrismaService,
     {
       provide: APP_FILTER,
       useClass: ErrorFilter,

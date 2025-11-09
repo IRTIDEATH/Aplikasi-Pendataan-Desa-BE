@@ -28,6 +28,8 @@ model User {
   premium       Boolean?
   sessions      Session[]
   accounts      Account[]
+  warga         Warga?
+  register      Register?
 
   @@unique([email])
   @@map("user")
@@ -77,4 +79,77 @@ model Verification {
   updatedAt  DateTime @default(now()) @updatedAt
 
   @@map("verification")
+}
+
+model Warga {
+  id            String   @id @default(uuid())
+  userId        String   @unique
+  nik           String   @db.VarChar(100)
+  nama_warga    String   @db.VarChar(150)
+  tempat_lahir  String   @db.VarChar(200)
+  tanggal_lahir DateTime @db.Date
+  warganegaraId String
+  alamat        String   @db.Text
+  pekerjaanId   String
+
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  pekerjaan   Pekerjaan   @relation(fields: [pekerjaanId], references: [id], onDelete: Cascade)
+  warganegara Warganegara @relation(fields: [warganegaraId], references: [id], onDelete: Cascade)
+  Register    Register[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Pekerjaan {
+  id             String  @id @default(uuid())
+  nama_pekerjaan String  @db.VarChar(200)
+  Warga          Warga[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Register {
+  id              String @id @default(uuid())
+  userId          String @unique
+  wargaId         String
+  pindahId        String
+  jenisRegisterId String
+  keperluan       String @db.Text
+
+  user          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  warga         Warga         @relation(fields: [wargaId], references: [id], onDelete: Cascade)
+  pindah        Pindah        @relation(fields: [pindahId], references: [id], onDelete: Cascade)
+  jenisregister JenisRegister @relation(fields: [jenisRegisterId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Pindah {
+  id           String     @id @default(uuid())
+  jenis_pindah String     @db.VarChar(100)
+  Register     Register[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model JenisRegister {
+  id             String     @id @default(uuid())
+  jenis_register String     @db.VarChar(150)
+  Register       Register[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Warganegara {
+  id               String  @id @default(uuid())
+  jenis_kebangsaan String  @db.VarChar(100)
+  Warga            Warga[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

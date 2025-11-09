@@ -1,7 +1,7 @@
 import { betterAuth } from 'better-auth';
 import { prismaAdapter } from 'better-auth/adapters/prisma';
 import { admin, bearer, openAPI } from 'better-auth/plugins';
-import { PrismaService } from 'src/common/prisma.service';
+import { PrismaService } from 'src/common/database/prisma.service';
 import { env } from 'src/lib/env';
 
 export const auth = betterAuth({
